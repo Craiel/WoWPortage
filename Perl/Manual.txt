@@ -1,0 +1,112 @@
+WoWAce Portage System
+
+1) What is this
+
+The WoWAce Portage System is a Platform Independent alternative to the WAU (WoWAceUpdater).
+It is written entirely in Standard Perl and needs the Perl Interpreter installed.
+The Scripts have been tested with Perl 5.8.7 but i guess it should work with any Perl Version above 5.8.
+
+You can get a free Perl Interpreter for almost any Platform at http://www.activestate.com/Products/ActivePerl/.
+
+Used Modules:
+    use Time::Local;
+    use LWP::UserAgent;
+    use HTTP::Request;
+    use Archive::Zip;
+    use Cwd;
+    use File::Temp;
+    use File::Path;
+    use File::Copy;
+
+Though it has been tested for a while now i still consider this BETA, so if you have Bug's to report or Suggestions/Additions you are welcome to Contact me. Since it's Perl the Source Code is open, so no need to ask for it ;).
+
+The WoWAce Portage System and all it's Scripts/Modules are provided as-is. Use them at your own Risk.
+
+
+2) Setup
+
+To get the System working you have to edit the emerge.cfg to adjust the Path's for the WoW Installation.
+You have to edit the Following Parameters:
+
+  PORTDIR        -- where to store the Portage Database (Information of all available Addons)
+  DISTDIR        -- where to store the Downloaded ZIP Files, for later re-use
+  WOWROOT        -- where WoW is Installed
+  PATHDELIM        -- \ or / depending on Platform
+
+You can also edit the USE Flags inside the emerge.cfg. Their use is explained in there.
+
+Before Using the System you should Sync with the Server first check 3.4 on this.
+
+3) Usage
+
+
+* 3.1 Emerging Addons
+To call the Desired function you have to use a Command Line or Batch File/Shell Script.
+The Script is always called with "emerge.pl" or "perl emerge.pl".
+
+The Normal usage is to call the Emerge with an Addon Name. It will then look for the Addons specified and emerge it to your WoW Installation.
+
+    Example: emerge.pl BigWigs
+
+    Note: the Addon Name must not be Case Sensitive but has to be exact in spelling
+
+If you have the .zip Files in your DISTDIR Folder than no communication with the Internet is required at all, this can be very handy for Offline Installations of WoW.
+
+
+* 3.2 Searching Addons
+You can Search for Specific Addons with the --search or -s parameter.
+The Portage will search and List any matching Addon displaying the Latest Version, the Installed Version, last modification Date and the Description for each match.
+
+    Example: emerge.pl -s FuBar
+
+    Note: this performs a full-text search with the supplied string(s). Meaning you would also find FuBar_RegenFu etc in this Case
+
+
+* 3.3 Updating Installed Addons
+If you supply "world" as Addon name it will be replaced with any Addon you have installed.
+
+    Example: emerge.pl world
+    This would emerge/update all Addons you have installed, note that this will Install only updates that updated versions available
+
+
+* 3.4 syncing Portage Database
+To get Information about newly added/updated addons the Database needs to Sync with the Web.
+This is currently done by Checking a Web Page containing the Information (currently http://www.wowace.com/files/).
+The Address is specified within the emerge.cfg if you wish to create your own mirror.
+To Sync simply call the Emerge with the --sync or -y.
+
+    Example: emerge.pl --sync
+
+
+* 3.5 Tips
+
+Parameters do not have to be in Specific Order and several Addons and Parameters can be given at the same time.
+
+    Example: emerge.pl BigWigs -rf Cartographer
+    This would emerge BigWigs and Cartographer but only Fetch the Zip files without Installing them and doing so even if the local Versions are already up to date
+
+
+4) Dependencies
+
+One of the Major Features this System has is to Check for Depending Addons and emerging/updating them in one process.
+To do this a dependency file is necessary which tells the system which Addon belongs to which dependency.
+The file that describes that is the "emerge.depend".
+Since there is no easy way to track all dependency's yet the file has to be edited manually.
+I will try to keep the Dependency table up to date, if you find missing or incorrect entry's please let me know.
+
+
+5) Masking Packages
+
+Within the File emerge.mask you can Specify Addons that are "masked".
+This means that these will not be updated and not be available for Installation.
+
+
+6) Disclaimer
+
+The Idea and Implementation of the Portage System is loosely based on the EBuild and Portage System of the Gentoo Linux Distribution (www.Gentoo.org).
+
+Do not redistribute the Script and/or it's Modules under different name without asking for permission to do so first.
+
+You are free to apply changes in the code for yourself but do not distribute these under different Versions. Instead let me know about them and i will see to implement them should they be useful/necessary.
+
+The WoWAce Portage System and all it's Scripts/Modules are provided as-is. Use them at your own Risk.

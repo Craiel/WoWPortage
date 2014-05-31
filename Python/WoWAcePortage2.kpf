@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Komodo Project File - DO NOT EDIT -->
+<project id="07f6383d-c19b-4157-8b74-c1f253ebb085" name="WoWAcePortage2.kpf" kpf_version="3">
+<preference-set idref="07f6383d-c19b-4157-8b74-c1f253ebb085">
+  <boolean id="import_live">1</boolean>
+</preference-set>
+</project>
